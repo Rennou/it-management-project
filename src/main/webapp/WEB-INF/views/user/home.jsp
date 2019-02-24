@@ -1,0 +1,20 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<jsp:include page="../script-include.jsp" />
+</head>
+<body>
+	<div class="container">
+		<jsp:include page="../main-menu.jsp" />
+	</div>
+
+	<div class="container">
+		<div class="row">
+			<div class="col-md-2"><jsp:include page="left-menu.jsp" /></div>
+			<div class="col-sm-10"></div>
+		</div>
+	</div>
+</body>
+</html>

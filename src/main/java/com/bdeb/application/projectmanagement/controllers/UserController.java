@@ -19,7 +19,6 @@ public class UserController {
 
 	@PostMapping("/home")
 	public String home(Model model) {
-		//System.out.println("User" +authenticatedUser.getUser().getUsername());
 		if (userService.hasRole("ADMIN")) {
 			return "redirect:admin";
 		} else {
@@ -31,7 +30,6 @@ public class UserController {
 
 			if (userService.hasAnyRole(userRoles)) {
 				return "redirect:user";
-
 			}
 		}
 		return null;

@@ -4,6 +4,7 @@ import java.util.Collection;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -13,6 +14,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.bdeb.application.projectmanagement.repository.UserRepository;
+import com.bdeb.service.commun.SecurityHeader;
 import com.bdeb.service.user.User;
 
 @Service("userService")
@@ -20,15 +22,28 @@ public class UserService implements UserDetailsService {
 
 	@Autowired
 	UserRepository userRepository;
+	
+	@Value("${application.name}")
+	String idAppl;
+	
+	@Value("${application.password}")
+	String password;
+	
+	
 
 	private User authentifiedUser = null;;
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		User user = userRepository.getUserByUsername(username);
+		
+		SecurityHeader securityHeader = new SecurityHeader();
+		securityHeader.setUsername(idAppl);
+		securityHeader.setPassword(password);
+		
+		User user = userRepository.getUser(securityHeader,username);
 		
 		this.authentifiedUser = user;
-		
+				
 		if (null == user) {
 			throw new UsernameNotFoundException("User: " + username + " not found");
 		}

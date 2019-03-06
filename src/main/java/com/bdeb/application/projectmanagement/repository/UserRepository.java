@@ -20,33 +20,30 @@ import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.client.RestTemplate;
 
 import com.bdeb.service.commun.SecurityHeader;
-import com.bdeb.service.user.Role;
 import com.bdeb.service.user.User;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Repository
 public class UserRepository {
-	
+
 	public static final Logger LOGGER = LoggerFactory.getLogger(UserRepository.class);
 
-	@Autowired 
+	@Autowired
 	RestTemplate restTemplate;
-	
+
 	@Autowired
 	ObjectMapper jsonMapper;
-	
-	
+
 	@Autowired
 	PasswordEncoder passwordEncoder;
-	
+
 	@Value("${service.user.url}")
 	String baseUrl;
-	
-	
+
 	public User getUser(SecurityHeader header, String username) {
 
 		try {
-			
+
 			HttpHeaders headers = new HttpHeaders();
 			headers.setContentType(MediaType.APPLICATION_JSON);
 			List<MediaType> accepts = new ArrayList<MediaType>();
@@ -56,13 +53,12 @@ public class UserRepository {
 			headers.add("Security-Header", jsonMapper.writeValueAsString(header));
 
 			HttpEntity<?> request = new HttpEntity<>(headers);
-			
-			ResponseEntity<User> response =
-					restTemplate.exchange(baseUrl + "/" + username, HttpMethod.GET, request,
+
+			ResponseEntity<User> response = restTemplate.exchange(baseUrl + "/" + username, HttpMethod.GET, request,
 					User.class);
-			
+
 			return response.getBody();
-			
+
 		} catch (IOException e) {
 
 			LOGGER.error("Error when trying to call user service: {}", e.getMessage());
@@ -77,22 +73,21 @@ public class UserRepository {
 
 		return null;
 	}
-	
-	public User addUser(SecurityHeader header, User user) {
+
+	public boolean addUser(SecurityHeader header, User user) {
 
 		try {
-			
+
 			HttpHeaders headers = new HttpHeaders();
 			headers.setContentType(MediaType.APPLICATION_JSON);
 			headers.add("Security-Header", jsonMapper.writeValueAsString(header));
 
 			HttpEntity<User> request = new HttpEntity<>(user, headers);
 
-			ResponseEntity<User> response = restTemplate.exchange(baseUrl + "/add" , HttpMethod.POST, request,
-					User.class);
+			restTemplate.exchange(baseUrl + "/add", HttpMethod.POST, request, User.class);
 
-			return response.getBody();
-			
+			return true;
+
 		} catch (IOException e) {
 
 			LOGGER.error("Error when trying to call user service: {}", e.getMessage());
@@ -101,13 +96,13 @@ public class UserRepository {
 
 			LOGGER.error("Error when trying to call user service: {}", e.getResponseBodyAsString());
 
-		} catch(Exception e) {
-			
+		} catch (Exception e) {
+
 			LOGGER.error("Error when trying to call user service: {}", e.getMessage());
 
 		}
-		
-		return null;
+
+		return false;
 
 	}
 }

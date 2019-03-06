@@ -2,11 +2,13 @@ package com.bdeb.application.projectmanagement.configs;
 
 import java.util.Locale;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.format.FormatterRegistry;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.ui.context.support.ResourceBundleThemeSource;
 import org.springframework.validation.Validator;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
@@ -31,7 +33,6 @@ import com.bdeb.application.projectmanagement.util.DateFormatter;
 @EnableWebMvc
 @ComponentScan(basePackages = { "com.bdeb.application.projectmanagement" })
 public class WebConfig implements WebMvcConfigurer {
-
 	
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {

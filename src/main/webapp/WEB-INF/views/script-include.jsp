@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 
 <link rel="stylesheet" href="styles/style.css">
 <meta charset="utf-8">
@@ -12,3 +12,16 @@
 	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+<style>
+td {
+	padding: 10px;
+}
+
+.editform {
+	border-style: solid;
+	border-width: 2px;
+	border-color: blue;
+	caption-side: top;
+}
+</style>

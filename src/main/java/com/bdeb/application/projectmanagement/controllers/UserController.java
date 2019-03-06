@@ -9,7 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import com.bdeb.application.projectmanagement.security.UserService;
+import com.bdeb.application.projectmanagement.service.UserService;
 
 @Controller
 public class UserController {

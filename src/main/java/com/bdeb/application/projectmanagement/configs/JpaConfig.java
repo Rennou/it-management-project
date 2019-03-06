@@ -17,6 +17,7 @@ import org.springframework.orm.jpa.JpaVendorAdapter;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 /**
  * Created by iuliana.cosmina on 7/14/17.
@@ -25,6 +26,7 @@ import org.springframework.transaction.PlatformTransactionManager;
 @EnableJpaRepositories(basePackages = {"com.bdeb.application.projectmanagement.repository"})
 @ComponentScan(basePackages  = {"com.bdeb.application.projectmanagement"} )
 @PropertySource("classpath:application.properties")
+@EnableTransactionManagement
 public class JpaConfig {
 	
 	@Value("${spring.jpa.datasource.driver}")

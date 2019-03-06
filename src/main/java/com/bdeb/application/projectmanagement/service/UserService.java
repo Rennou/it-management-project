@@ -1,4 +1,4 @@
-package com.bdeb.application.projectmanagement.security;
+package com.bdeb.application.projectmanagement.service;
 
 import java.util.Collection;
 import java.util.List;
@@ -13,8 +13,10 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import com.bdeb.application.projectmanagement.forms.ResourceForm;
 import com.bdeb.application.projectmanagement.repository.UserRepository;
 import com.bdeb.service.commun.SecurityHeader;
+import com.bdeb.service.user.Role;
 import com.bdeb.service.user.User;
 
 @Service("userService")
@@ -29,9 +31,6 @@ public class UserService implements UserDetailsService {
 	@Value("${application.password}")
 	String password;
 	
-	
-
-	private User authentifiedUser = null;;
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -41,24 +40,21 @@ public class UserService implements UserDetailsService {
 		securityHeader.setPassword(password);
 		
 		User user = userRepository.getUser(securityHeader,username);
-		
-		this.authentifiedUser = user;
+				
 				
 		if (null == user) {
 			throw new UsernameNotFoundException("User: " + username + " not found");
 		}
-
-		return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(),
+ 
+		return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(),
 				getAuthorities(user));
 	}
 
-	public User getAuthentifiedUser() {
-		return authentifiedUser;
+	public String getAuthentifiedUser() {
+		org.springframework.security.core.userdetails.User user = (org.springframework.security.core.userdetails.User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		return user.getUsername();
 	}
 
-	public void setAuthentifiedUser(User authentifiedUser) {
-		this.authentifiedUser = authentifiedUser;
-	}
 
 	private static Collection<? extends GrantedAuthority> getAuthorities(User user) {
 		String[] userRoles = user.getRoles().stream().map((role) -> role.value()).toArray(String[]::new);
@@ -88,5 +84,25 @@ public class UserService implements UserDetailsService {
 		}
 		return false;
 	}
+	
+	public boolean addUserAccount(ResourceForm resourceForm) {
+		User user = new User();
+		user.setEmail(resourceForm.getEmail());
+		user.setUsername(resourceForm.getResource().getUsername());
+		user.setPassword(resourceForm.getPassword());
+		user.setFirstname(resourceForm.getResource().getFirstName());
+		user.setLastname(resourceForm.getResource().getLastName());
+		user.setPhonenumber(resourceForm.getPhone());
+		user.getRoles().add(Role.fromValue(resourceForm.getRole()));
+		
+		SecurityHeader securityHeader = new SecurityHeader();
+		securityHeader.setUsername(idAppl);
+		securityHeader.setPassword(password);
+		
+		
+		return userRepository.addUser(securityHeader, user);
+		
+	}
+	
 
 }

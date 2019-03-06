@@ -1,9 +1,17 @@
 package com.bdeb.application.projectmanagement.model;
 
 import java.io.Serializable;
-import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 
 /**
@@ -20,6 +28,8 @@ public class Resource implements Serializable {
 	private String firstName;
 	private String lastName;
 	private String userIns;
+	private boolean accountCreated;
+	private String role;
 	private List<Project> projects;
 	private List<ProjectResource> projectResources;
 	private List<StepStatus> stepStatuses;
@@ -77,6 +87,29 @@ public class Resource implements Serializable {
 
 	public void setUserIns(String userIns) {
 		this.userIns = userIns;
+	}
+	
+	
+
+	@Column(nullable=false)
+	public boolean isAccountCreated() {
+		return accountCreated;
+	}
+
+
+	public void setAccountCreated(boolean accountCreated) {
+		this.accountCreated = accountCreated;
+	}
+
+
+	@Column(nullable=false, length=15)
+	public String getRole() {
+		return role;
+	}
+
+
+	public void setRole(String role) {
+		this.role = role;
 	}
 
 

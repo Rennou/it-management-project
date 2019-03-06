@@ -1,4 +1,4 @@
-package com.bdeb.application.projectmanagement.security;
+package com.bdeb.application.projectmanagement.service;
 
 import java.util.Collection;
 import java.util.HashSet;

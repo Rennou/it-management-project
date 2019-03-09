@@ -41,5 +41,10 @@ public class ProjectRepository {
 		return query.setParameter("e1", username).getResultList();
 	}
 	
+	@Transactional
+	public void add(Project project) {
+		em.persist(project);
+	}
+	
 	
 }

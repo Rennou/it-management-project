@@ -2,6 +2,8 @@ package com.bdeb.application.projectmanagement.model;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -23,7 +25,7 @@ public class Project implements Serializable {
 	private Date startDate;
 	private String userIns;
 	private Resource resource;
-	private List<ProjectResource> projectResources;
+	private List<ProjectResource> projectResources = new ArrayList<ProjectResource>();
 	private List<Sprint> sprints;
 
 	public Project() {
@@ -94,7 +96,7 @@ public class Project implements Serializable {
 
 
 	@Column(nullable=false, length=50)
-	public String getUserIns() {
+	public String getUserIns() {  
 		return this.userIns;
 	}
 

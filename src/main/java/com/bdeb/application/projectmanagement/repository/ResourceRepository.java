@@ -24,23 +24,34 @@ public class ResourceRepository {
 		return query.getResultList();
 	}
 
+	@SuppressWarnings("unchecked")
+	@Transactional(readOnly = true)
+	public List<Resource> getList(String roleCode) {
+		Query query = em.createQuery("SELECT res FROM Resource res " + "where res.role = :e1");
+		return query.setParameter("e1", roleCode).getResultList();
+	}
+
+	@SuppressWarnings("unchecked")
+	@Transactional(readOnly = true)
+	public List<Resource> getList(List<String> roles) {
+		Query query = em.createQuery("SELECT res FROM Resource res " + "where res.role in :e1");
+		return query.setParameter("e1", roles).getResultList();
+	}
+
 	@Transactional
 	public void add(Resource resource) {
-		try {
-
-			em.persist(resource);
-
-		} catch (RuntimeException e) {
-			e.printStackTrace();
-			// if ( tx != null && tx.isActive() ) tx.rollback();
-
-		}
+		em.persist(resource);
 	}
 
 	@Transactional
 	public void update(Resource resource) {
 		System.out.println("call update resources....");
 		em.merge(resource);
+	}
+
+	@Transactional(readOnly = true)
+	public Resource getResource(String id) {
+		return em.find(Resource.class, id);
 	}
 
 }

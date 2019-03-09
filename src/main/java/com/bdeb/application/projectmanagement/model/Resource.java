@@ -1,8 +1,11 @@
 package com.bdeb.application.projectmanagement.model;
 
 import java.io.Serializable;
+import java.util.Collections;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,6 +15,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 
 
 /**
@@ -33,6 +37,15 @@ public class Resource implements Serializable {
 	private List<Project> projects;
 	private List<ProjectResource> projectResources;
 	private List<StepStatus> stepStatuses;
+	
+	@SuppressWarnings("serial")
+	private static final Map<String, String> functions = Collections.unmodifiableMap(
+		    new HashMap<String, String>() {{
+		        put("PM", "Chef dr projet");
+		        put("DEV", "Analyste programmeur");
+		        put("QAA", "Analyste assurance quality");
+		        put("PO", "Analyste d'affaire");
+		    }});
 
 	public Resource() {
 	}
@@ -186,5 +199,19 @@ public class Resource implements Serializable {
 
 		return stepStatus;
 	}
+	
+	@Transient
+	public String getFullName() {
+		return firstName + " - " + lastName;
+	}
 
+	@Transient
+	public String getFunction() {
+		return functions.get(getRole());
+	}
+	
+	@Transient
+	public String getNameFunction() {
+		return getFullName() +" - " + getFunction();
+	}
 }

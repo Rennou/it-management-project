@@ -27,6 +27,16 @@ public class ResourceService {
 		LOGGER.info("getResourceList...");
 		return resourceRepository.getList();
 	}
+	
+	public List<Resource> getResourceList(String roleCode) {
+		LOGGER.info("getResourceList...");
+		return resourceRepository.getList(roleCode);
+	}
+	
+	public List<Resource> getResourceList(List<String> roles) {
+		LOGGER.info("getResourceList...");
+		return resourceRepository.getList(roles);
+	}
 
 	public boolean addResource(ResourceForm resourceForm) {
 		LOGGER.info("addResource...");

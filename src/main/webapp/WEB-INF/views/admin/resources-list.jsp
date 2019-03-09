@@ -43,11 +43,8 @@
 									<td>${resource.username}</td>
 									<td>${resource.lastName}</td>
 									<td>${resource.firstName}</td>
-									<td>${resource.role}</td>
+									<td>${resource.function}</td>
 									<td>${resource.accountCreated ? 'Oui' : 'Non'}</td>
-
-
-
 								</tr>
 							</c:forEach>
 						</tbody>

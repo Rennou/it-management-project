@@ -23,5 +23,6 @@ td {
 	border-width: 2px;
 	border-color: blue;
 	caption-side: top;
+	width: 100%;
 }
 </style>

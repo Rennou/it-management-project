@@ -17,7 +17,37 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-md-2"><jsp:include page="left-menu.jsp" /></div>
-			<div class="col-sm-10">This page is under construction</div>
+			<div class="col-sm-10">
+				<br /> <a class="btn btn-primary" href="/projects?form"
+					role="button">Nouveau Projet</a> <br /> <br />
+				<c:if test="${empty projects}">
+					La liste des projets est vide!
+				</c:if>
+
+				<c:if test="${not empty projects}">
+					<table class="table table-striped">
+						<thead>
+							<tr>
+								<th scope="col">Code</th>
+								<th scope="col">Description</th>
+								<th scope="col">Date de démarrage</th>
+								<th scope="col">Date de Fin</th>
+							</tr>
+						</thead>
+						<tbody>
+							<c:forEach items="${projects}" var="project">
+								<tr>
+									<td>${project.code}</td>
+									<td>${project.description}</td>
+									<td>${project.startDate}</td>
+									<td>${empty resource.endDate ? 'N/A' : resource.endDate}</td>
+								</tr>
+							</c:forEach>
+						</tbody>
+					</table>
+				</c:if>
+
+			</div>
 		</div>
 	</div>
 </body>

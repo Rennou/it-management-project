@@ -75,7 +75,7 @@
 								<form:select id  = "roles" path="role" class="form-control" required  = "true">
 								   <form:option value="NONE" label="Selectionner la fonction"/>
 								   <form:option value="PM" label="Chef de projet"/>
-								   <form:option value="DEV" label="Programmeur Analsyte"/>
+								   <form:option value="DEV" label="Programmeur Analyste"/>
 								   <form:option value="QAA" label="Analsyte en assurance qualitie"/>
 								   <form:option value="PO" label="Proprietaire du produit"/>								   
 								</form:select>

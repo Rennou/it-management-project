@@ -58,7 +58,7 @@
 							
 							<td>
 								<div class="form-group">
-									<form:label path="project.resource" for="managers">Gestionnaire:</form:label>
+									<form:label path="managerId" for="managers">Gestionnaire:</form:label>
 									<form:select path="managerId" id = "managers" class="form-control">
 										<form:options items="${projectForm.managers}"  itemValue = "username" itemLabel = "fullName"/>
 									</form:select>

@@ -16,7 +16,9 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-md-2"><jsp:include page="left-menu.jsp" /></div>
-			<div class="col-sm-10"></div>
+			<div class="col-sm-10">
+			
+			</div>
 		</div>
 	</div>
 </body>

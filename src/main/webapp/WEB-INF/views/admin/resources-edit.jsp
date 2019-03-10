@@ -71,7 +71,7 @@
 							</td>
 							<td>
 							<div class="form-group">
-							    <form:label path= "resource.username" for="roles">Fonction:</form:label> 
+							    <form:label path= "role" for="roles">Fonction:</form:label> 
 								<form:select id  = "roles" path="role" class="form-control" required  = "true">
 								   <form:option value="NONE" label="Selectionner la fonction"/>
 								   <form:option value="PM" label="Chef de projet"/>

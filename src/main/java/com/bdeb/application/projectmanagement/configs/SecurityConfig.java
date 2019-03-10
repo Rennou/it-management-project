@@ -13,6 +13,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
+import com.bdeb.application.projectmanagement.service.UserService;
+
 /**
  * Created by iuliana.cosmina on 8/16/16.
  */
@@ -22,7 +24,7 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Autowired
-	private UserDetailsService userService;
+	private UserService userService;
 		
 	@Bean
     public PasswordEncoder passwordEncoder() {
